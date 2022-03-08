@@ -1,4 +1,15 @@
+# =====================================================================
+# Chord Diagram with Circlize in R Programming Language
+# ---------------------------------------------------------------------
+# This script contains some codes to visualize circular layout 
+# connected by links in order to represent relations between elements. 
+# The name of such plot is sometimes called Chord Diagram.
+# =====================================================================
+
+# install "circlize" package from CRAN
 library("circlize")
+
+# Import all data from your local file system
 mypath <- ('D:/Data/Backup_akun_apps/DPIS_2021/Chord_R_SR2021/All_activity.txt') 
 dataset <- read.table(mypath, header = FALSE)
 datamatrix <- data.matrix(dataset)
@@ -14,24 +25,25 @@ goalnames <- c("No Poverty", "Zero Hunger", "Good Health and Well-being", "Quali
                "Responsible Consumtion and Production", "Climate Action", "Life Below Water", "Life on Land", 
                "Piece, Justice and Strong Instituion", "Partnerships for The Goals")
 
-
+# Set the rows and columns name.
+# Let’s assume that data_m matrix in which rows correspond to starting states 
+# (primary option) and columns correspond to ending states (secondary option).
 namarow <- goalnames
 namacol <- paste0(" ", namarow)
-#namacol <- namarow
-namacol <- rev(namacol) # reverse the order, start from SDG17
+namacol <- rev(namacol) # reverse the order, start from SDG17: Partenerships for The Goals
 
-rownames(datamatrix) = namarow
-colnames(datamatrix) = namacol
+rownames(datamatrix) <- namarow
+colnames(datamatrix) <- namacol
 
 # colors for raws and columns
 rawcol <- col
-names(rawcol) <- namarow #columncol <- rev(col) #names(columncol) <- namacol
-#set columns color to grey
+names(rawcol) <- namarow 
+#set columns color to grey in order to represent the secondary option
 columncol <- "grey"
 columncol <- rep(columncol,17)
 names(columncol) <- namacol
 grid_col <- append(rawcol, columncol, after = length(rawcol))
-#grid_col
+
 
 #create a chord diagram but without labeling 
 circos.par(start.degree = 90)
