@@ -30,8 +30,7 @@ goalnames <- c("No Poverty", "Zero Hunger", "Good Health and Well-being", "Quali
 # (primary option) and columns correspond to ending states (secondary option).
 namarow <- goalnames
 namacol <- paste0(" ", namarow)
-namacol <- rev(namacol) # reverse the order, start from SDG17: Partenerships for The Goals
-
+namacol <- rev(namacol)            # reverse the order, start from SDG17: Partenerships for The Goals
 rownames(datamatrix) <- namarow
 colnames(datamatrix) <- namacol
 
